@@ -11,12 +11,12 @@ function init(size){
     labels: times(size),
     datasets: [
       {
-        label: "My second dataset",
+        label: "Initial Noise",
         fillColor: "rgba(223,223,223, 1)",
         data: n.p
       },
       {
-        label: "My datet",
+        label: "Normalized Data",
         fillColor: "rgba(0,127,127, 0.3)",
         data: n.commit(n.normalized)
       }
@@ -37,6 +37,6 @@ function init(size){
 }
 
 window.init = init;
-setTimeout(function() {
+document.addEventListener("DOMContentLoaded", function(event) { 
   window.n = init(100);
-}, 1000);
+});
