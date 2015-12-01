@@ -2,4 +2,4 @@
 
 ![https://dl.dropboxusercontent.com/u/2555196/1dnoise.png](https://dl.dropboxusercontent.com/u/2555196/1dnoise.png)
 
-This was a weekend experiment to trying and smooth out randomly generated noise. 
+This was a weekend experiment to try and smooth out randomly generated noise. 
