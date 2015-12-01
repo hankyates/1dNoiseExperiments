@@ -8,7 +8,7 @@ function seed(size) {
 }
 
 function noise(p, x) {
-  return p[~~x];
+  return ~~p[~~x];
 }
 
 function smooth(n, x) {
@@ -16,7 +16,7 @@ function smooth(n, x) {
 }
 
 function interpolatedNoise(n, interpolate, x) {
-  var v0 = n(x - 1);
+  var v0 = n(x);
   var v1 = n(x + 1);
   return interpolate(v0, v1, random(0, 1, true));
 }

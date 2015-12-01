@@ -18,7 +18,10 @@ function init(size){
       {
         label: "Normalized Data",
         fillColor: "rgba(0,127,127, 0.3)",
-        data: n.commit(n.normalized)
+        data: n.commit(
+        n.smooth
+
+        )
       }
     ]
   };
