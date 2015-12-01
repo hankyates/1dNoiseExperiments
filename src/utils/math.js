@@ -8,9 +8,14 @@ function cosInterpolate(v0, v1, t) {
   return lerp(v0, v1, f);
 }
 
+function isInt(n) {
+   return n % 1 === 0;
+}
+
 module.exports = {
   lerp: lerp,
   cosInterpolate: cosInterpolate,
+  isInt: isInt,
   primes: function(num, beg) {
     //Sieve of Eratosthenes
     //https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes

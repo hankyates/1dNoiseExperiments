@@ -3,16 +3,19 @@ var random = require('lodash/number/random');
 var partial = require('lodash/function/partial');
 var math = require('./utils/math');
 
-function seed(size) {
-  return times(size*2, partial(random, 0, size, false));
+function seed(size, l) {
+  var limit = l ? l : size;
+  return times(size*2, partial(random, -limit, limit, false));
 }
 
 function noise(p, x) {
-  return ~~p[~~x];
+  var value = math.isInt(x) ? p[x] :
+    math.lerp(p[~~x], p[(~~x)+1], x%1);
+  return value;
 }
 
 function smooth(n, x) {
-  return ~~((n(x)/2) + (n(x-1)/4) + (n(x+1)/4));
+  return (n(x)/2) + (n(x-1)/4) + (n(x+1)/4);
 }
 
 function interpolatedNoise(n, interpolate, x) {
@@ -29,8 +32,8 @@ function cosNoise(n, x) {
   return interpolatedNoise(n, math.cosInterpolate, x);
 }
 
-function Noise(size) {
-  this.p = seed(size);
+function Noise(size, limit) {
+  this.p = seed(size, limit);
   this.noise = partial(noise, this.p);
   this.smooth = partial(smooth, this.noise);
   this.normalized = partial(cosNoise, this.smooth);
@@ -38,8 +41,8 @@ function Noise(size) {
 }
 
 module.exports = {
-  createNoise: function(size) {
-    return new Noise(size);
+  createNoise: function(size, limit) {
+    return new Noise(size, limit);
   },
   seed: seed,
   noise: noise,
