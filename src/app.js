@@ -17,9 +17,9 @@ function lineMaker(length, n, color) {
 function adder(funcs, x) {
   var total = 0;
   for (var i = 1; i <= funcs.length; i++) {
-    var frequency = Math.pow(2, i);
-    var amplitude = Math.pow(0.2, i);
-    total = total + funcs[i-1](x * frequency) * amplitude;
+    var frequency = Math.pow(1, i);
+    var amplitude = Math.pow(0.5, i);
+    total += funcs[i-1](x * frequency) * amplitude;
   }
   return total;
 }
@@ -38,18 +38,22 @@ function initScene(size){
   var sin = x => Math.sin(x)*100;
 
   var makeLine = partial(lineMaker, size);
-  var added = partial(adder, [sin, n.normalized]);
-  var line1 = makeLine(n.noise, 0xFF0000);
-  var line2 = makeLine(added, 0x00FFFF);
+  var added = partial(adder, [sin, n.noise]);
+  var lines = [
+    makeLine(n.noise, 0xFF0000),
+    makeLine(added, 0xFFFFFF),
+    makeLine(n.normalized, 0x0000FF),
+    //makeLine(sin, 0xFFFF00),
+    //makeLine(n.smooth, 0x00FF00)
+  ];
 
-  scene.add(line1);
-  scene.add(line2);
+  lines.forEach(function(l) { scene.add(l) });
 
   scene.add(light);
   light.position.set( 10, 0, 10 );
   camera.position.set(0, 0, 100);
   camera.lookAt(new THREE.Vector3(0, 0, 100));
-  renderer.setClearColor( 0xdddddd, 1);
+  renderer.setClearColor( 0x000000, 1);
   renderer.render( scene, camera );
 
   return {

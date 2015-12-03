@@ -5,7 +5,7 @@ var math = require('./utils/math');
 
 function seed(size, l) {
   var limit = l ? l : size;
-  return times(size*2, partial(random, -limit, limit, false));
+  return times(size*1000, partial(random, -limit, limit, false));
 }
 
 function noise(p, x) {
